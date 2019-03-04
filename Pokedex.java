@@ -3,17 +3,17 @@ import java.util.*;
 
 public class Pokedex {
 
-    private ArrayList<String> pokedex = new ArrayList<String>(); // - the ArrayList with all pokemon
+    private ArrayList<String> pokedex = new ArrayList<>(); // - the ArrayList with all pokemon
     private Random rand = new Random();                     // - the random generator to create the draft class
     private int poke;                                       // - also part of the random generator
     private StringBuilder draftClass = new StringBuilder(); // - StringBuilder to change the draft class if needed
 
     /**
      * constructor that takes @param file and lists all pokemon
-     * @throws FileNotFoundException just incase
+     * @throws FileNotFoundException just in case
      */
-    Pokedex(String file) throws FileNotFoundException {
-        Scanner scan = new Scanner(new File(file));
+    Pokedex() throws FileNotFoundException {
+        Scanner scan = new Scanner(new File("DraftClass.txt"));
 
         //while there are pokemon to be added to the list, add them to the list
         while(scan.hasNextLine()){
@@ -33,8 +33,17 @@ public class Pokedex {
             poke = rand.nextInt(pokedex.size());
             draftClass.append("\n").append(i + 1).append(". #").append(pokedex.get(poke));
         }
-
         return draftClass.toString();
+    }
+
+    /**
+     * rerolls a pokemon in the draft class if needed
+     * @param num the poke you want rerolled
+     * @return the new poke
+     */
+    String reroll(int num){
+        //todo
+        return "";
     }
 
     /**
