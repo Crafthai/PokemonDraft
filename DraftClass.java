@@ -3,20 +3,48 @@ import java.io.*;
 
 public class DraftClass {
 
-    private final int numPokemon = 807;
-    private String[] allPokemon = new String[numPokemon];
+    private int numPokemon;
+    private String[] allPokemon;
     private String[] draftClass;
     private Random rand = new Random();
-    private int max = 806;
+    private int max;
+    private String format;
     /**
      * constructor which fills the array with all 807 pokemon from a text file
      * @throws FileNotFoundException
      */
     DraftClass() throws FileNotFoundException {
-        Scanner scan = new Scanner(new File("Pokedex"));
+        Scanner name = new Scanner(System.in);
+        System.out.println("select format, 1 for all pokemon, 2 for sword/shield VGC");
+        String statement = name.next();
+        switch(statement){
+            case "1": format = "Pokedex";
+            numPokemon = 807;
+            break;
+            case "2": format = "Gen8VGC";
+            System.out.println("Do you want alternate forms? Default form is Galarian for Galarian Pokemon. Default" +
+                    " for Pokemon with Alolan forms are their normal forms. type 1 for additional forms, " +
+                    "or type 2 for no additional forms");
+            statement = name.next();
+            if(statement.equals("1")){
+                numPokemon = 234;
+            } else {
+                numPokemon = 226;
+            }
+            break;
+            default: System.out.println("you really let me down");
+            numPokemon = 10000;
+            break;
+        }
+        max = numPokemon-1;
+        allPokemon = new String[numPokemon];
+        Scanner scan = new Scanner(new File(format));
 
         int i = 0;
         while(scan.hasNext()){
+            if(i == 226 & statement.equals("2")){
+                break;
+            }
             allPokemon[i] = scan.nextLine();
             i++;
         }
